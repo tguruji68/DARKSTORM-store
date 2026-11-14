@@ -28,15 +28,15 @@
     .player-box input { flex: 1; padding: 10px 14px; border-radius: 6px; border: 1px solid #334155; background: #0f172a; color: #fff; outline: none; font-size: 1rem; }
     .player-box input:focus { border-color: #22c55e; }
 
-    .tabs { display: flex; justify-content: center; gap: 12px; margin: 15px auto; flex-wrap: wrap; padding: 0 15px; }
-    .tab-btn { background: #1e293b; color: #cbd5e1; border: 1px solid #334155; padding: 10px 22px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+    .tabs { display: flex; justify-content: center; gap: 10px; margin: 15px auto; flex-wrap: wrap; padding: 0 15px; }
+    .tab-btn { background: #1e293b; color: #cbd5e1; border: 1px solid #334155; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.2s; font-size: 0.92rem; }
     .tab-btn.active, .tab-btn:hover { background: #22c55e; color: #0f172a; border-color: #22c55e; }
 
     .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; }
     .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 20px; text-align: center; transition: 0.2s; }
     .card:hover { transform: translateY(-4px); border-color: #22c55e; }
-    .card h3 { color: #38bdf8; margin-bottom: 8px; font-size: 1.25rem; }
+    .card h3 { color: #38bdf8; margin-bottom: 8px; font-size: 1.2rem; }
     .card p { font-size: 0.85rem; color: #94a3b8; margin-bottom: 14px; min-height: 36px; }
     .price { font-size: 1.4rem; font-weight: bold; color: #22c55e; margin-bottom: 14px; }
     .buy-btn { background: #22c55e; color: #0f172a; border: none; padding: 10px 16px; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%; transition: 0.2s; font-size: 0.95rem; }
@@ -80,6 +80,8 @@
   <div class="tabs">
     <button class="tab-btn active" onclick="showCategory('ranks', this)">👑 Ranks (5)</button>
     <button class="tab-btn" onclick="showCategory('crates', this)">📦 Crates (5)</button>
+    <button class="tab-btn" onclick="showCategory('money', this)">💰 Money</button>
+    <button class="tab-btn" onclick="showCategory('passes', this)">🎟️ Passes & Extras</button>
   </div>
 
   <div class="container">
@@ -147,6 +149,18 @@
         { name: "Mythic Crate", price: 9, desc: "Mythic keys, enchantments & resources" },
         { name: "ElitePhoenix Crate", price: 5, desc: "ElitePhoenix special loot & tools" },
         { name: "Apex Crate", price: 2, desc: "Starter Apex rewards & surprise items" }
+      ],
+      money: [
+        { name: "10,000 In-Game Money", price: 29, desc: "Instant 10k balance in your SMP account" },
+        { name: "50,000 In-Game Money", price: 99, desc: "Best value 50k balance for shop & auctions" },
+        { name: "1,00,000 In-Game Money", price: 179, desc: "100k cash bundle to dominate the economy" },
+        { name: "5,00,000 Mega Money", price: 499, desc: "Ultimate 500k millionaire starter pack" }
+      ],
+      passes: [
+        { name: "One-Time Unban Pass", price: 150, desc: "Single ban removal (Permanent/Hack bans excluded)" },
+        { name: "Mute Removal Pass", price: 49, desc: "Instant chat unmute pass (One-time use)" },
+        { name: "Custom Chat Tag", price: 79, desc: "Apne naam ke aage apna custom tag lagao" },
+        { name: "Nickname Access", price: 99, desc: "In-game /nick command unlock karein" }
       ]
     };
 
@@ -216,7 +230,7 @@
     function openCheckout() {
       const user = document.getElementById('username').value.trim();
       if (!user) return alert("Pehle upar apna Minecraft Username daalo!");
-      if (cart.length === 0) return alert("Cart khali hai! Pehle koi rank ya crate add karo.");
+      if (cart.length === 0) return alert("Cart khali hai! Pehle koi item add karo.");
       
       const total = cart.reduce((sum, item) => sum + item.price, 0);
       const itemsList = cart.map(i => `• ${i.name} (₹${i.price})`).join('<br>');
